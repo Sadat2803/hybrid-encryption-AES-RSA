@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="js/hybrid-crypto.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/aes-rsa.js"></script>
+</head>
+
+<body>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  <label for="username">Enter username:</label>
+  <input type="text" name="username" id="username">
+  <button  id="usernameButton" name="confirm" onclick="getUsersFromServer('console');" >Confirm username</button></br></br>
+  <label for="console">Console : </label></br></br>
+  <textarea id="console" readonly  rows="10" cols="100"></textarea></br></br>
+  <label for="fileToUpload">Select file to encrypt :</label>
+  <input type="file" name="fileToUpload" id="fileToUpload"></br></br>
+  <textarea readonly id="fileText" name="encryptedFileText"  rows="25" cols="100"></textarea></br></br>
+  <input type="submit" id="encryptButton" value="Encrypt file" >
+  <a id="decryptionLink" href="decryption.html" hidden>Go to decryption</a>
+</form>
+</body>
+
+<script>
+document.getElementById("fileToUpload").addEventListener('change', function() {
+  getFileText("fileToUpload","fileText");
+})
+
+document.getElementById("usernameButton").addEventListener("click", function(event){
+  event.preventDefault();
+});
+
+document.getElementById("encryptButton").addEventListener("click", function(event){
+  event.preventDefault();
+  encryptFile("fileText");
+});
+</script>
+</html>

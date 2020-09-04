@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="js/hybrid-crypto.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/aes-rsa-decrypt.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+  var crypt = new Crypt({aesKeySize: 128});
+  var rsa  = new RSA();
+  rsa.generateKeyPair(function(keyPair) {
+    // Callback function receives new 1024 bit key pair as a first argument
+    var publicKey = keyPair.publicKey;
+    var privateKey = keyPair.privateKey;
+    var encryptedText = crypt.encrypt(publicKey,"hello world");
+    console.log(encryptedText);
+    console.log(typeof(privateKey));
+    var decryptedText = crypt.decrypt(privateKey,encryptedText);
+    console.log(decryptedText)
+  });
+</script>
+</html>

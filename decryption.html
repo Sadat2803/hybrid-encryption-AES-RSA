@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="js/hybrid-crypto.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/aes-rsa-decrypt.js"></script>
+</head>
+
+<body>
+  <form action="upload.php" method="post" enctype="multipart/form-data">
+    <label for="filesSelect" >Select file to decrypt<label></br>
+      <select name="cars" id="filesSelect">
+    </select></br></br>
+    <label for="fileText">File:</label></br>
+    <textarea readonly id="fileText"   rows="25" cols="100"></textarea></br></br>
+    <label for="privateKey">Enter private key:</label></br>
+    <textarea  id="privateKey"   name = "privateKey" rows="10" cols="100"></textarea></br></br>
+    <input disabled  id="decryptButton" type="submit" name="submit" value="Decrypt file" onclick="decryptFile()">
+  </form>
+</body>
+
+<script>
+$(document).ready(function(){
+    getFilesFromServer();
+});
+
+$('#filesSelect').on('change', function() {
+  var index = $('#filesSelect').val();
+  $("#fileText").val(filesToDecrypt[index]["encryptedText"]);
+});
+
+document.getElementById("decryptButton").addEventListener('click', function() {
+  event.preventDefault();
+});
+$('#privateKey').keyup(function()
+{
+  $("#decryptButton").removeAttr('disabled');
+})
+</script>
+</html>
